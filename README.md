@@ -5,7 +5,7 @@ Home: http://www.videolan.org/developers/x264.html
 
 Package license: GPL 2
 
-Feedstock license: BSD
+Feedstock license: BSD 3-Clause
 
 Summary: A free software library for encoding video streams into the H.264/MPEG-4 AVC format.
 
@@ -69,6 +69,7 @@ Terminology
 
 Current build status
 ====================
+
 Linux: [![Circle CI](https://circleci.com/gh/conda-forge/x264-feedstock.svg?style=svg)](https://circleci.com/gh/conda-forge/x264-feedstock)
 OSX: [![TravisCI](https://travis-ci.org/conda-forge/x264-feedstock.svg?branch=master)](https://travis-ci.org/conda-forge/x264-feedstock) 
 Windows: [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/conda-forge/x264-feedstock?svg=True)](https://ci.appveyor.com/project/conda-forge/x264-feedstock/branch/master)
