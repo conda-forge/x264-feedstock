@@ -11,16 +11,16 @@ source:
 
 build:
     number: 1
-    skip: true  # [win]
+    skip: true         # [win]
 
 requirements:
     build:
       - yasm
-      - perl
-      - gcc     # [osx]
+      - perl 5.20.3.1
+      - gcc            # [osx]
 
     run:
-      - libgcc  # [osx]
+      - libgcc         # [osx]
 
 test:
     commands:
