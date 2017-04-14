@@ -10,17 +10,14 @@ source:
   md5: cfd27222c7aa9983259ddb10f7f570a6
 
 build:
-  number: 2
+  number: 3
   skip: true         # [win]
 
 requirements:
   build:
-    - yasm
+    - toolchain
     - perl 5.20.3.1
-    - gcc            # [osx]
-
-  run:
-    - libgcc         # [osx]
+    - yasm
 
 test:
   commands:
