@@ -1,4 +1,4 @@
-{% set version = "20131218" %}
+{% set version = "20131219" %}
 
 package:
   name: x264
@@ -7,7 +7,7 @@ package:
 source:
   fn: x264-snapshot-{{ version }}-2245-stable.tar.bz2
   url: http://download.videolan.org/pub/videolan/x264/snapshots/x264-snapshot-{{ version }}-2245-stable.tar.bz2
-  md5: f8a490637d8fbdef8200870c3e7f711d
+  md5: bfe49145a8203043ac3f358fd498b761
 
 build:
   number: 0
