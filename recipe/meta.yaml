@@ -10,13 +10,14 @@ source:
   md5: f8a490637d8fbdef8200870c3e7f711d
 
 build:
-  number: 0
+  number: 1
   skip: true         # [win]
 
 requirements:
   build:
-    - toolchain
     - perl 5.20.3.1
+    - {{ compiler('c') }}
+  host:
     - yasm
 
 test:
