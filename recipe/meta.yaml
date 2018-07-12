@@ -1,13 +1,14 @@
-{% set version = "20131218" %}
+{% set version = "20180501" %}
+{% set sha256 = "c5ad8fc87a4c5f0908027a68feebc345463afc79870c99d560f8edf58783ea7a" %}
 
 package:
   name: x264
-  version: "20131218"
+  version: {{ version }}
 
 source:
   fn: x264-snapshot-{{ version }}-2245-stable.tar.bz2
   url: http://download.videolan.org/pub/videolan/x264/snapshots/x264-snapshot-{{ version }}-2245-stable.tar.bz2
-  md5: f8a490637d8fbdef8200870c3e7f711d
+  sha256: {{ sha256 }}
 
 build:
   number: 0
@@ -15,9 +16,10 @@ build:
 
 requirements:
   build:
-    - toolchain
-    - perl 5.20.3.1
-    - yasm
+    - {{ compiler("c") }}
+    - perl
+  host:
+    - nasm
 
 test:
   commands:
@@ -29,7 +31,7 @@ test:
 
 about:
   home: http://www.videolan.org/developers/x264.html
-  license: GPL 2
+  license: GPL-2.0
   license_file: COPYING
   summary: A free software library for encoding video streams into the H.264/MPEG-4 AVC format.
 
@@ -37,3 +39,4 @@ extra:
   recipe-maintainers:
     - jakirkham
     - 183amir
+    - carlodri

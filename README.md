@@ -3,7 +3,7 @@ About x264
 
 Home: http://www.videolan.org/developers/x264.html
 
-Package license: GPL 2
+Package license: GPL-2.0
 
 Feedstock license: BSD 3-Clause
 
