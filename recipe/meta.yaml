@@ -19,10 +19,10 @@ build:
 
 requirements:
   build:
-    - {{ compiler("c") }}
-    - perl
     run_exports:
       - x264 >={{ version }},<{{ next_year }}0000
+    - {{ compiler("c") }}
+    - perl
   host:
     - nasm
 
