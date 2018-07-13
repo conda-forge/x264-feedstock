@@ -1,7 +1,7 @@
 # {% set version = "20180501" %}
 {% set year = '2018' %}
 {% set version = year + '0712' %}
-{% set next_year = int(year) + 1 %}
+{% set next_year = year|int + 1 %}
 {% set sha256 = "c5ad8fc87a4c5f0908027a68feebc345463afc79870c99d560f8edf58783ea7a" %}
 
 package:
