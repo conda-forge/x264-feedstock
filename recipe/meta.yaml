@@ -15,11 +15,11 @@ source:
 build:
   number: 0
   skip: true         # [win]
+  run_exports:
+    - x264 >={{ version }},<{{ next_year }}0000
 
 requirements:
   build:
-    run_exports:
-      - x264 >={{ version }},<{{ next_year }}0000
     - {{ compiler("c") }}
     - perl
   host:
