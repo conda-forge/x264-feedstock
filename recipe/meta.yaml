@@ -1,7 +1,7 @@
 {% set year = '2018' %}
 {% set version = year + '0712' %}
 {% set next_year = year|int + 1 %}
-{% set sha256 = "c5ad8fc87a4c5f0908027a68feebc345463afc79870c99d560f8edf58783ea7a" %}
+{% set sha256 = "2dfaa34feb7d6dc833ce0f3d0504b31ed409f218d0d8e43c389bb050f0081ff2" %}
 
 package:
   name: x264
