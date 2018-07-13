@@ -1,4 +1,7 @@
-{% set version = "20180501" %}
+# {% set version = "20180501" %}
+{% set year = "2018" %}
+{% set version = year + '0501' %}
+{% set next_year = int(year) + 1 %}
 {% set sha256 = "c5ad8fc87a4c5f0908027a68feebc345463afc79870c99d560f8edf58783ea7a" %}
 
 package:
@@ -11,13 +14,15 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 0
+  number: 1
   skip: true         # [win]
 
 requirements:
   build:
     - {{ compiler("c") }}
     - perl
+    run_exports:
+      - x264 >={{ version }},<{{ next_year }}0000
   host:
     - nasm
 
