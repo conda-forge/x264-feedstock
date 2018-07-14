@@ -1,22 +1,20 @@
-{% set year = '2018' %}
-{% set version = year + '0712' %}
-{% set next_year = year|int + 1 %}
-{% set sha256 = "2dfaa34feb7d6dc833ce0f3d0504b31ed409f218d0d8e43c389bb050f0081ff2" %}
+{% set so_number = '152' %}
+{% set release_date = '20180713' %}
+{% set lib_version = so_number + '.' + release_date %}
+{% set sha256 = "9796a1a022ff3cb8e54df3322b645b2aca5a4c19524d0da6404ea731627e719b" %}
 
 package:
   name: x264
-  version: {{ version }}
+  version: {{ release_date }}
 
 source:
-  fn: x264-snapshot-{{ version }}-2245-stable.tar.bz2
-  url: http://download.videolan.org/pub/videolan/x264/snapshots/x264-snapshot-{{ version }}-2245-stable.tar.bz2
+  fn: x264-snapshot-{{ release_date }}-2245-stable.tar.bz2
+  url: http://download.videolan.org/pub/videolan/x264/snapshots/x264-snapshot-{{ release_date }}-2245-stable.tar.bz2
   sha256: {{ sha256 }}
 
 build:
   number: 0
   skip: true         # [win]
-  run_exports:
-    - x264 >={{ version }},<{{ next_year }}0000
 
 requirements:
   build:
@@ -25,13 +23,40 @@ requirements:
   host:
     - nasm
 
+# This is here just to fool the linter until
+#  https://github.com/conda-forge/conda-smithy/issues/833
+# is fixed
 test:
   commands:
-    - test -f ${PREFIX}/include/x264.h         # [unix]
-    - test -f ${PREFIX}/lib/libx264.a          # [unix]
-    - test -f ${PREFIX}/lib/libx264.dylib      # [osx]
-    - test -f ${PREFIX}/lib/libx264.so         # [linux]
-    - x264 --help                              # [unix]
+
+outputs:
+  - name: x264
+    build:
+      run_exports:
+         - {{ pin_subpackage('libx264') }}
+    files:
+      - bin/x264
+    test:
+      commands:
+        - x264 --help                                          # [unix]
+
+  - name: libx264
+    version: {{ lib_version }}
+    build:
+      run_exports:
+        - libx264 >={{ so_number }}.00000000,<{{ so_number|int + 1 }}.00000000
+    files:
+      - include/x264*
+      - lib/libx264*
+      - lib/pkgconfig/x264.pc
+    test:
+      commands:
+        - test -f ${PREFIX}/include/x264.h                     # [unix]
+        - test -f ${PREFIX}/lib/libx264.a                      # [unix]
+        - test -f ${PREFIX}/lib/libx264.dylib                  # [osx]
+        - test -f ${PREFIX}/lib/libx264.{{ so_number }}.dylib  # [osx]
+        - test -f ${PREFIX}/lib/libx264.so                     # [linux]
+        - test -f ${PREFIX}/lib/libx264.so.{{ so_number }}     # [linux]
 
 about:
   home: http://www.videolan.org/developers/x264.html
@@ -44,3 +69,4 @@ extra:
     - jakirkham
     - 183amir
     - carlodri
+    - sdvillal
