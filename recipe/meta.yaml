@@ -44,7 +44,7 @@ outputs:
     version: {{ lib_version }}
     build:
       run_exports:
-        - libx264 >={{ so_number }}.00000000,<{{ so_number|int + 1 }}.00000000
+        - {{ pin_subpackage('libx264') }}
     files:
       - include/x264*
       - lib/libx264*
