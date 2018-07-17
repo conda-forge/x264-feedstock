@@ -23,6 +23,7 @@ Current release info
 
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-libx264-green.svg)](https://anaconda.org/conda-forge/libx264) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libx264.svg)](https://anaconda.org/conda-forge/libx264) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libx264.svg)](https://anaconda.org/conda-forge/libx264) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libx264.svg)](https://anaconda.org/conda-forge/libx264) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-x264-green.svg)](https://anaconda.org/conda-forge/x264) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/x264.svg)](https://anaconda.org/conda-forge/x264) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/x264.svg)](https://anaconda.org/conda-forge/x264) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/x264.svg)](https://anaconda.org/conda-forge/x264) |
 
 Installing x264
@@ -34,16 +35,16 @@ Installing `x264` from the `conda-forge` channel can be achieved by adding `cond
 conda config --add channels conda-forge
 ```
 
-Once the `conda-forge` channel has been enabled, `x264` can be installed with:
+Once the `conda-forge` channel has been enabled, `libx264, x264` can be installed with:
 
 ```
-conda install x264
+conda install libx264 x264
 ```
 
-It is possible to list all of the versions of `x264` available on your platform with:
+It is possible to list all of the versions of `libx264` available on your platform with:
 
 ```
-conda search x264 --channel conda-forge
+conda search libx264 --channel conda-forge
 ```
 
 

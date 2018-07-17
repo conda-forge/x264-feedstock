@@ -10,6 +10,7 @@ else
 fi
 export CFLAGS
 export CXXLAGS="${CFLAGS}"
+export AS=`which nasm`
 
 chmod +x configure
 ./configure \
