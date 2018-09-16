@@ -15,7 +15,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 0
+  number: 1001
   skip: true         # [win]
   run_exports:
     - x264 >={{ version }},<{{ epoch + '!' }}{{ so_number|int + 1 }}
@@ -24,8 +24,8 @@ requirements:
   build:
     - {{ compiler("c") }}
     - perl
-  host:
     - nasm
+  host:
 
 test:
   commands:

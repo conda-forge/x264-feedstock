@@ -2,14 +2,17 @@
 
 mkdir -vp ${PREFIX}/bin
 
-CFLAGS="-Wall -g -m64 -pipe -O2 -fPIC"
+# Set the assembler to `nasm`
+export AS="${BUILD_PREFIX}/bin/nasm"
+
+EXTRA_CFLAGS="-Wall -g -m64 -pipe -O2 -fPIC"
 if [[ $ARCH = 64 ]]; then
-    CFLAGS="${CFLAGS} -march=x86-64"
+    EXTRA_CFLAGS="${EXTRA_CFLAGS} -march=x86-64"
 else
-    CFLAGS="${CFLAGS} -march=i386"
+    EXTRA_CFLAGS="${EXTRA_CFLAGS} -march=i386"
 fi
-export CFLAGS
-export CXXLAGS="${CFLAGS}"
+export CFLAGS="${CFLAGS} ${EXTRA_CFLAGS}"
+export CXXFLAGS="${CXXFLAGS} ${EXTRA_CFLAGS}"
 
 chmod +x configure
 ./configure \
