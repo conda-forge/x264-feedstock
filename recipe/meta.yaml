@@ -24,8 +24,8 @@ requirements:
   build:
     - {{ compiler("c") }}
     - perl
-  host:
     - nasm
+  host:
 
 test:
   commands:
