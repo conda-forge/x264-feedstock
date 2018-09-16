@@ -2,6 +2,7 @@
 
 mkdir -vp ${PREFIX}/bin
 
+unset AS
 CFLAGS="-Wall -g -m64 -pipe -O2 -fPIC"
 if [[ $ARCH = 64 ]]; then
     CFLAGS="${CFLAGS} -march=x86-64"
