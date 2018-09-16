@@ -12,7 +12,7 @@ else
     CFLAGS="${CFLAGS} -march=i386"
 fi
 export CFLAGS
-export CXXFLAGS="${CFLAGS}"
+export CXXFLAGS="${CXXFLAGS} ${CFLAGS}"
 
 chmod +x configure
 ./configure \
