@@ -7,6 +7,10 @@ if [[ ${target_platform} == "linux-64" || ${target_platform} == "osx-64" ]]; the
     export AS="${BUILD_PREFIX}/bin/nasm"
 fi
 
+if [ ${target_platform} == "linux-aarch64" ]; then
+    sed -i 's/stack_alignment=16/stack_alignment=64/g' configure
+fi
+
 # EXTRA_CFLAGS="-Wall -g -m64 -pipe -O2 -fPIC"
 # if [[ $ARCH = 64 ]]; then
 #     EXTRA_CFLAGS="${EXTRA_CFLAGS} -march=x86-64"
