@@ -1,4 +1,4 @@
-{% set so_number = '155' %}
+{% set so_number = '152' %}
 {% set epoch = '1' %}
 {% set version_prefix = epoch + '!' + so_number %}
 {% set release_date = '20180806' %}
