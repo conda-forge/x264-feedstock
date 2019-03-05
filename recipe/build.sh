@@ -7,6 +7,9 @@ if [[ ${target_platform} == "linux-64" || ${target_platform} == "osx-64" || ${ta
     export AS="${BUILD_PREFIX}/bin/nasm"
 fi
 
+if [ ${target_platform} == "linux-aarch64" ]; then
+    EXTRA_CONFIG="--disable-asm"
+fi
 
 
 # if [ ${target_platform} == "linux-aarch64" ]; then
@@ -28,6 +31,7 @@ chmod +x configure
         --enable-pic \
         --enable-shared \
         --enable-static \
+        $EXTRA_CONFIG \
         --prefix=${PREFIX}
 make
 make install
