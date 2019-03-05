@@ -8,7 +8,8 @@ if [[ ${target_platform} == "linux-64" || ${target_platform} == "osx-64" ]]; the
 fi
 
 if [ ${target_platform} == "linux-aarch64" ]; then
-    sed -i 's/stack_alignment=16/stack_alignment=64/g' configure
+    export CFLAGS="-mpreferred-stack-boundary=8 ${CFLAGS}"
+    export CXXFLAGS="-mpreferred-stack-boundary=8 ${CXXFLAGS}"
 fi
 
 # EXTRA_CFLAGS="-Wall -g -m64 -pipe -O2 -fPIC"
