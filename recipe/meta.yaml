@@ -1,7 +1,7 @@
-{% set so_number = '152' %}
+{% set so_number = '155' %}
 {% set epoch = '1' %}
 {% set version_prefix = epoch + '!' + so_number %}
-{% set release_date = '20180717' %}
+{% set release_date = '20180806' %}
 {% set version = version_prefix + '.' + release_date %}
 {% set sha256 = "e991cad3cc656d683edacaccffc0352a7b5d4dd123ae43aebfe37c9cc52548bd" %}
 
@@ -15,7 +15,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 1001
+  number: 0
   skip: true         # [win]
   run_exports:
     - x264 >={{ version }},<{{ epoch + '!' }}{{ so_number|int + 1 }}
