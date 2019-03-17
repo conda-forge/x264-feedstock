@@ -8,7 +8,7 @@ if [[ ${target_platform} == "linux-64" || ${target_platform} == "osx-64" || ${ta
 fi
 
 if [ ${target_platform} == "linux-aarch64" ]; then
-    EXTRA_CONFIG="--disable-asm"
+    unset AS
 fi
 
 
