@@ -5,7 +5,7 @@ set -xe
 mkdir -vp ${PREFIX}/bin
 
 # Set the assembler to `nasm`
-if [[ ${target_platform} == "linux-64" || ${target_platform} == "osx-64" ]]; then
+if [[ ${target_platform} == "linux-64" || ${target_platform} == osx-* ]]; then
     export AS="${BUILD_PREFIX}/bin/nasm"
 fi
 
