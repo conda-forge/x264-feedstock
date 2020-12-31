@@ -11,6 +11,7 @@ package:
   version: {{ version }}
 
 source:
+  # need to use the git source to make version.sh in source work
   git_url: https://code.videolan.org/videolan/x264/
   git_rev: {{ commit }}
 
