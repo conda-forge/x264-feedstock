@@ -1,18 +1,19 @@
-{% set so_number = '152' %}
+{% set so_number = '161' %}
 {% set epoch = '1' %}
 {% set version_prefix = epoch + '!' + so_number %}
-{% set release_date = '20180806' %}
-{% set version = version_prefix + '.' + release_date %}
-{% set sha256 = "958e78e7563f0018285ebdbff563fb22db89b0abf3649d7e914abd9d50785fc6" %}
+{% set revision = '3030' %}
+{% set version = version_prefix + '.' + revision %}
+# This is revision 3030. (git rev-list HEAD | wc -l)
+{% set commit = "8bd6d28025c9dcc101cb194f9141bcff3ea91500" %}
 
 package:
   name: x264
   version: {{ version }}
 
 source:
-  fn: x264-snapshot-{{ release_date }}-2245-stable.tar.bz2
-  url: http://download.videolan.org/pub/videolan/x264/snapshots/x264-snapshot-{{ release_date }}-2245-stable.tar.bz2
-  sha256: {{ sha256 }}
+  # need to use the git source to make version.sh in source work
+  git_url: https://code.videolan.org/videolan/x264/
+  git_rev: {{ commit }}
 
 build:
   number: 0
@@ -22,6 +23,7 @@ build:
 
 requirements:
   build:
+    - gnuconfig  # [unix]
     - {{ compiler("c") }}
     - perl
     - nasm
