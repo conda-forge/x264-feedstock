@@ -12,11 +12,11 @@ package:
 
 source:
   # need to use the git source to make version.sh in source work
-  git_url: https://code.videolan.org/videolan/x264/
+  git_url: https://code.videolan.org/videolan/x264
   git_rev: {{ commit }}
 
 build:
-  number: 0
+  number: 1
   run_exports:
     - x264 >={{ version }},<{{ epoch + '!' }}{{ so_number|int + 1 }}
 
@@ -27,6 +27,7 @@ requirements:
     - perl
     - nasm
     - make
+    - git-bash  # [win]  # m2-bash is broken and fails to pass arguments to grep and sed
   host:
 
 test:
@@ -37,7 +38,9 @@ test:
     - test -f ${PREFIX}/lib/libx264.{{ so_number }}.dylib  # [osx]
     - test -f ${PREFIX}/lib/libx264.so                     # [linux]
     - test -f ${PREFIX}/lib/libx264.so.{{ so_number }}     # [linux]
-    - x264 --help                                          # [unix]
+    - if not exist %LIBRARY_BIN%\\libx264-{{ so_number }}.dll exit 1  # [win]
+    - if not exist %LIBRARY_LIB%\\libx264.dll.lib exit 1   # [win]
+    - x264 --help
 
 about:
   home: http://www.videolan.org/developers/x264.html
