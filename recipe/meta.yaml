@@ -5,6 +5,7 @@
 {% set version = version_prefix + '.' + revision %}
 # This is revision 3030. (git rev-list HEAD | wc -l)
 {% set commit = "8bd6d28025c9dcc101cb194f9141bcff3ea91500" %}
+{% set posix = 'm2-' if win else '' %}
 
 package:
   name: x264
@@ -12,12 +13,11 @@ package:
 
 source:
   # need to use the git source to make version.sh in source work
-  git_url: https://code.videolan.org/videolan/x264/
+  git_url: https://code.videolan.org/videolan/x264
   git_rev: {{ commit }}
 
 build:
-  number: 0
-  skip: true         # [win]
+  number: 1
   run_exports:
     - x264 >={{ version }},<{{ epoch + '!' }}{{ so_number|int + 1 }}
 
@@ -28,6 +28,12 @@ requirements:
     - perl
     - nasm
     - make
+    # m2-git is required, because "git clone" won't work when combining the "git" package with "m2-bash"
+    - {{ posix }}git  # [win]
+    - {{ posix }}bash  # [win]
+    - {{ posix }}coreutils  # [win]
+    - {{ posix }}grep  # [win]
+    - {{ posix }}sed  # [win]
   host:
 
 test:
@@ -38,7 +44,11 @@ test:
     - test -f ${PREFIX}/lib/libx264.{{ so_number }}.dylib  # [osx]
     - test -f ${PREFIX}/lib/libx264.so                     # [linux]
     - test -f ${PREFIX}/lib/libx264.so.{{ so_number }}     # [linux]
-    - x264 --help                                          # [unix]
+    - if not exist %LIBRARY_INC%\\x264.h exit 1            # [win]
+    - if not exist %LIBRARY_BIN%\\libx264-{{ so_number }}.dll exit 1  # [win]
+    - if not exist %LIBRARY_LIB%\\libx264.dll.lib exit 1   # [win]
+    - if not exist %LIBRARY_LIB%\\x264.lib exit 1          # [win]
+    - x264 --help
 
 about:
   home: http://www.videolan.org/developers/x264.html
