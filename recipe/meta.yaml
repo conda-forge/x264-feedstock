@@ -1,10 +1,10 @@
-{% set so_number = '161' %}
+{% set so_number = '164' %}
 {% set epoch = '1' %}
 {% set version_prefix = epoch + '!' + so_number %}
-{% set revision = '3030' %}
+{% set revision = '3095' %}
 {% set version = version_prefix + '.' + revision %}
 # This is revision 3030. (git rev-list HEAD | wc -l)
-{% set commit = "8bd6d28025c9dcc101cb194f9141bcff3ea91500" %}
+{% set commit = "baee400fa9ced6f5481a728138fed6e867b0ff7f" %}
 {% set posix = 'm2-' if win else '' %}
 
 package:
@@ -17,7 +17,7 @@ source:
   git_rev: {{ commit }}
 
 build:
-  number: 1
+  number: 0
   run_exports:
     - x264 >={{ version }},<{{ epoch + '!' }}{{ so_number|int + 1 }}
 
