@@ -3,7 +3,7 @@
 {% set version_prefix = epoch + '!' + so_number %}
 {% set revision = '3095' %}
 {% set version = version_prefix + '.' + revision %}
-# This is revision 3030. (git rev-list HEAD | wc -l)
+# This is revision 3095. (git rev-list HEAD | wc -l)
 {% set commit = "baee400fa9ced6f5481a728138fed6e867b0ff7f" %}
 {% set posix = 'm2-' if win else '' %}
 
