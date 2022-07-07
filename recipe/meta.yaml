@@ -29,12 +29,11 @@ requirements:
     - nasm
     - make
     # m2-git is required, because "git clone" won't work when combining the "git" package with "m2-bash"
-    - {{ posix }}git  # [win]
+    # - {{ posix }}git  # [win]
     - {{ posix }}bash  # [win]
     - {{ posix }}coreutils  # [win]
     - {{ posix }}grep  # [win]
     - {{ posix }}sed  # [win]
-  host:
 
 test:
   commands:
