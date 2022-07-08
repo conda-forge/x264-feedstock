@@ -13,15 +13,20 @@ package:
 
 source:
   # need to use the git source to make version.sh in source work
-  git_url: https://code.videolan.org/videolan/x264.git
-  git_rev: {{ commit }}
-  patches:
-    - libname_windows.patch
+  - url: https://code.videolan.org/videolan/x264/-/archive/{{ commit }}/x264-{{ commit }}.tar.gz
+    sha256: 436a2be54d8bc0cb05dd33ecbbcb7df9c3b57362714fcdaa3a5991189a33319b
+    patches:
+      - libname_windows.patch
+  - path: version.sh
 
 build:
   number: 0
   run_exports:
     - x264 >={{ version }},<{{ epoch + '!' }}{{ so_number|int + 1 }}
+  script_env:
+    - X264_REV={{ revision }}
+    - X264_VERSION=r{{ revision }} {{ commit[:7] }}
+    - X264_POINTVER=0.{{ so_number }}.{{ revision }} {{ commit[:7] }}
 
 requirements:
   build:
@@ -30,8 +35,6 @@ requirements:
     - perl
     - nasm
     - make
-    # m2-git is required, because "git clone" won't work when combining the "git" package with "m2-bash"
-    # - {{ posix }}git  # [win]
     - {{ posix }}bash  # [win]
     - {{ posix }}coreutils  # [win]
     - {{ posix }}grep  # [win]
