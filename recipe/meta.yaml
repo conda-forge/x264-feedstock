@@ -17,6 +17,14 @@ source:
     sha256: 436a2be54d8bc0cb05dd33ecbbcb7df9c3b57362714fcdaa3a5991189a33319b
     patches:
       - libname_windows.patch
+  # 2022/07 hmaarrfk
+  # x264 attempts to detect the version from the git information.
+  # however, installing (and using) git on windows is tricky
+  # with m2- tools installed in parallel.
+  # Since the version file is easy to recreate, we use
+  # a thin stub of a file, along with exporting a few variables
+  # from this recipe as environment variables in the build process
+  # to recreate it
   - path: version.sh
 
 build:
