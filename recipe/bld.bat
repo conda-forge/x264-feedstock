@@ -13,5 +13,5 @@ make install
 if errorlevel 1 exit 1
 
 :: Make copies of the .lib files without the 'lib' prefix.
-copy %LIBRARY_LIB%\libx264.dll.lib %LIBRARY_LIB%\x264.lib
+copy %LIBRARY_LIB%\libx264.lib %LIBRARY_LIB%\x264.lib
 if errorlevel 1 exit 1

@@ -4,6 +4,8 @@ cp $BUILD_PREFIX/share/gnuconfig/config.* .
 set -xe
 mkdir -vp ${PREFIX}/bin
 
+./version.sh
+
 # Set the assembler to `nasm`
 if [[ ${target_platform} == "linux-64" || ${target_platform} == osx-64 ]]; then
     export AS="${BUILD_PREFIX}/bin/nasm"
@@ -18,7 +20,7 @@ chmod +x configure
         --host=$HOST \
         --enable-pic \
         --enable-shared \
-        --enable-static \
+        --disable-static \
         --prefix=${PREFIX}
 make -j${CPU_COUNT}
 make install
