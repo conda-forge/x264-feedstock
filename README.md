@@ -202,6 +202,3 @@ Feedstock Maintainers
 * [@jakirkham](https://github.com/jakirkham/)
 * [@sdvillal](https://github.com/sdvillal/)
 
-
-<!-- dummy commit to enable rerendering -->
-
