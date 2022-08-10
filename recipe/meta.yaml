@@ -63,7 +63,7 @@ test:
 
 about:
   home: http://www.videolan.org/developers/x264.html
-  license: GPL-2.0
+  license: GPL-2.0-or-later
   license_file: COPYING
   summary: A free software library for encoding video streams into the H.264/MPEG-4 AVC format.
 
