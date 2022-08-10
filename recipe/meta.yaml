@@ -28,7 +28,7 @@ source:
   - path: version.sh
 
 build:
-  number: 0
+  number: 1
   run_exports:
     - x264 >={{ version }},<{{ epoch + '!' }}{{ so_number|int + 1 }}
   script_env:
