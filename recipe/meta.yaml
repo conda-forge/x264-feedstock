@@ -28,7 +28,7 @@ source:
   - path: version.sh
 
 build:
-  number: 0
+  number: 1
   run_exports:
     - x264 >={{ version }},<{{ epoch + '!' }}{{ so_number|int + 1 }}
   script_env:
@@ -58,14 +58,14 @@ test:
     - if not exist %LIBRARY_INC%\\x264.h exit 1            # [win]
     - if not exist %LIBRARY_BIN%\\libx264-{{ so_number }}.dll exit 1  # [win]
     - if not exist %LIBRARY_LIB%\\libx264.lib exit 1       # [win]
-    - if not exist %LIBRARY_LIB%\\x264.lib exit 1          # [win]
     - x264 --help
 
 about:
   home: http://www.videolan.org/developers/x264.html
-  license: GPL-2.0
+  license: GPL-2.0-or-later
   license_file: COPYING
   summary: A free software library for encoding video streams into the H.264/MPEG-4 AVC format.
+  dev_url: https://code.videolan.org/videolan/x264
 
 extra:
   recipe-maintainers:

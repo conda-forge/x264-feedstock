@@ -20,7 +20,6 @@ chmod +x configure
         --host=$HOST \
         --enable-pic \
         --enable-shared \
-        --disable-static \
         --prefix=${PREFIX}
 make -j${CPU_COUNT}
 make install
