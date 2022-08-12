@@ -15,8 +15,6 @@ source:
   # need to use the git source to make version.sh in source work
   - url: https://code.videolan.org/videolan/x264/-/archive/{{ commit }}/x264-{{ commit }}.tar.gz
     sha256: 436a2be54d8bc0cb05dd33ecbbcb7df9c3b57362714fcdaa3a5991189a33319b
-    patches:
-      - libname_windows.patch
   # 2022/07 hmaarrfk
   # x264 attempts to detect the version from the git information.
   # however, installing (and using) git on windows is tricky
@@ -28,7 +26,7 @@ source:
   - path: version.sh
 
 build:
-  number: 1
+  number: 2
   run_exports:
     - x264 >={{ version }},<{{ epoch + '!' }}{{ so_number|int + 1 }}
   script_env:
