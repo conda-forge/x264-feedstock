@@ -6,7 +6,6 @@ set AS=%BUILD_PREFIX%\Library\bin\nasm.exe
 bash ./configure ^
   --enable-pic ^
   --enable-shared ^
-  --disable-static ^
   --prefix=%LIBRARY_PREFIX%
 if errorlevel 1 exit 1
 
