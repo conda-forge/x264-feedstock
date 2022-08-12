@@ -16,10 +16,12 @@ if [[ "${target_platform}" == *-aarch64 || "${target_platform}" == *-arm64 ]]; t
 fi
 
 chmod +x configure
+# Using --system-libx264 links the executable to the shared lib not the static library
 ./configure \
         --host=$HOST \
         --enable-pic \
         --enable-shared \
+        --system-libx264 \
         --prefix=${PREFIX}
 make -j${CPU_COUNT}
 make install
