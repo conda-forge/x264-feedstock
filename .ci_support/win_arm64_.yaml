@@ -1,14 +1,10 @@
 c_compiler:
-- gcc
-c_compiler_version:
-- '14'
+- vs2022
 channel_sources:
 - conda-forge
 channel_targets:
 - conda-forge main
-docker_image:
-- quay.io/condaforge/linux-anvil-ppc64le:alma10
 perl:
 - 5.32.1
 target_platform:
-- linux-ppc64le
+- win-arm64
