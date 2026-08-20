@@ -1,15 +1,13 @@
 c_compiler:
 - gcc
 c_compiler_version:
-- '10'
-cdt_name:
-- cos7
+- '15'
 channel_sources:
 - conda-forge
 channel_targets:
 - conda-forge main
 docker_image:
-- quay.io/condaforge/linux-anvil-ppc64le
+- quay.io/condaforge/linux-anvil-ppc64le:alma10
 perl:
 - 5.32.1
 target_platform:
