@@ -15,6 +15,10 @@ source:
   # need to use the git source to make version.sh in source work
   - url: https://code.videolan.org/videolan/x264/-/archive/{{ commit }}/x264-{{ commit }}.tar.gz
     sha256: 436a2be54d8bc0cb05dd33ecbbcb7df9c3b57362714fcdaa3a5991189a33319b
+    patches:
+      # ppc: Fix incompatible pointer type errors (upstream de1bea53), needed
+      # for GCC >=14 which promotes -Wincompatible-pointer-types to an error
+      - patches/0001-ppc-Fix-incompatible-pointer-type-errors.patch
   # 2022/07 hmaarrfk
   # x264 attempts to detect the version from the git information.
   # however, installing (and using) git on windows is tricky
@@ -38,6 +42,7 @@ requirements:
   build:
     - gnuconfig  # [unix]
     - {{ compiler("c") }}
+    - {{ stdlib("c") }}
     - perl
     - nasm
     - make
