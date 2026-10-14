@@ -1,0 +1,126 @@
+# This is revision 3095. (git rev-list HEAD | wc -l)
+schema_version: 1
+
+context:
+  so_number: 164
+  epoch: 1
+  revision: 3095
+  version: ${{ epoch }}!${{ so_number }}.${{ revision }}
+  commit: baee400fa9ced6f5481a728138fed6e867b0ff7f
+
+package:
+  name: x264
+  version: ${{ version }}
+
+source:
+  # need to use the git source to make version.sh in source work
+  - url: https://code.videolan.org/videolan/x264/-/archive/${{ commit }}/x264-${{ commit }}.tar.gz
+    sha256: 436a2be54d8bc0cb05dd33ecbbcb7df9c3b57362714fcdaa3a5991189a33319b
+    patches:
+      # ppc: Fix incompatible pointer type errors (upstream de1bea53), needed
+      # for GCC >=14 which promotes -Wincompatible-pointer-types to an error
+      - patches/0001-ppc-Fix-incompatible-pointer-type-errors.patch
+      # The Windows ARM64 recipe supplies clang-cpp, while the default cpp
+      # executable is absent.
+      - if: target_platform == "win-arm64"
+        then: 0001-use-clang-preprocessor-for-armasm.patch
+  # 2022/07 hmaarrfk
+  # x264 attempts to detect the version from the git information.
+  # however, installing (and using) git on windows is tricky
+  # with m2- tools installed in parallel.
+  # Since the version file is easy to recreate, we use
+  # a thin stub of a file, along with exporting a few variables
+  # from this recipe as environment variables in the build process
+  # to recreate it
+  - path: version.sh
+
+build:
+  number: 3
+  script:
+    env:
+      X264_REV: ${{ revision }}
+      X264_VERSION: r${{ revision }} ${{ commit[:7] }}
+      X264_POINTVER: 0.${{ so_number }}.${{ revision }} ${{ commit[:7] }}
+
+requirements:
+  build:
+    - if: unix
+      then: gnuconfig
+    - ${{ compiler("c") }}
+    - ${{ stdlib("c") }}
+    # The Windows ARM64 build needs clang-cpp (from clang) for assembly
+    # preprocessing, and m2-unix tools since perl/make are not available for
+    # win-arm64.
+    - if: target_platform == "win-arm64"
+      then: clang
+    - if: target_platform != "win-arm64"
+      then: perl
+    - if: target_platform != "win-arm64"
+      then: nasm
+    - if: target_platform != "win-arm64"
+      then: make
+    - if: target_platform == "win-arm64"
+      then: m2-perl
+    - if: target_platform == "win-arm64"
+      then: m2-make
+    - if: win
+      then: m2-bash
+    - if: win
+      then: m2-coreutils
+    - if: win
+      then: m2-grep
+    - if: win
+      then: m2-sed
+  run_exports:
+    - x264 >=${{ version }},<${{ epoch }}!${{ so_number + 1 }}
+
+tests:
+  - script:
+      - if: unix
+        then: test -f ${PREFIX}/include/x264.h
+      - if: unix
+        then: test ! -f ${PREFIX}/lib/libx264.a
+      - if: unix
+        then: test -f ${PREFIX}/lib/libx264${SHLIB_EXT}
+      - if: osx
+        then: test -f ${PREFIX}/lib/libx264.${{ so_number }}.dylib
+      - if: linux
+        then: test -f ${PREFIX}/lib/libx264.so.${{ so_number }}
+      - if: win
+        then: if not exist %LIBRARY_INC%\\x264.h exit 1
+      - if: win
+        then: if not exist %LIBRARY_BIN%\\libx264-${{ so_number }}.dll exit 1
+      - if: win
+        then: if not exist %LIBRARY_LIB%\\libx264.lib exit 1
+      - x264 --help
+  # Windows only: compile upstream example.c against the installed import
+  # library, verify the PE architecture of the built binaries and consumer,
+  # and encode eight frames through both the API and CLI, checking for
+  # SPS/PPS/IDR and slice NAL units. The MSVC toolchain (cl) is needed to
+  # build example.c and test_windows.c with the Windows SDK.
+  - if: win
+    then:
+      - script: run_test.bat
+        requirements:
+          build:
+            - ${{ compiler("c") }}
+            - ${{ stdlib("c") }}
+        files:
+          source:
+            - example.c
+          recipe:
+            - test_windows.c
+
+about:
+  license: GPL-2.0-or-later
+  license_file: COPYING
+  summary: A free software library for encoding video streams into the H.264/MPEG-4 AVC format.
+  homepage: http://www.videolan.org/developers/x264.html
+  repository: https://code.videolan.org/videolan/x264
+
+extra:
+  recipe-maintainers:
+    - jakirkham
+    - 183amir
+    - carlodri
+    - sdvillal

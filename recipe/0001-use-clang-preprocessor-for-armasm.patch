@@ -1,0 +1,18 @@
+From: Clay Warren
+Subject: Use the available Clang preprocessor for Windows ARM64 assembly
+
+The Windows ARM64 recipe supplies clang-cpp, while the default cpp executable
+is absent. Keep the existing -undef and _WIN32 arguments for target-neutral
+preprocessing before translating to armasm64 syntax.
+
+--- a/tools/gas-preprocessor.pl
++++ b/tools/gas-preprocessor.pl
+@@ -96,7 +96,7 @@
+ }
+ if ($as_type eq "armasm") {
+ 
+-    $preprocess_c_cmd[0] = "cpp";
++    $preprocess_c_cmd[0] = "clang-cpp";
+     push(@preprocess_c_cmd, "-undef");
+     # Normally a preprocessor for windows would predefine _WIN32,
+     # but we're using any generic system-agnostic preprocessor "cpp"
